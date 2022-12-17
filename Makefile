@@ -1,7 +1,9 @@
 .PHONY: config
 
 config:
-	cp config/init.vim ~/.config/nvim/
+	mkdir -p ~/.config/nvim/lua
+	cp config/lua/lspinstall.lua ~/.config/nvim/lua
+	cp config/init.vim ~/.config/nvim
 	cp config/options.ctags ~/.ctags.d/
 
 all: config
