@@ -40,6 +40,9 @@ return packer.startup(function(use)
   use 'nvim-telescope/telescope.nvim'
   use 'nvim-lua/plenary.nvim'
   use 'sharkdp/fd'
+  use 'lewis6991/gitsigns.nvim'
+
+  use 'github/copilot.vim'
 
   -- Colorscheme
   use 'ellisonleao/gruvbox.nvim'

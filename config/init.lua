@@ -64,6 +64,8 @@ require'lualine'.setup{
 	options = { theme = 'gruvbox'}
 }
 
+require'gitsigns'.setup()
+
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
