@@ -10,5 +10,7 @@ config:
 	cp -r config/kitty ~/.config/
 	# Ctags
 	cp config/options.ctags ~/.ctags.d/
+	# Clangd user config
+	cp config/clangd/.clangd ~/
 
 all: config
