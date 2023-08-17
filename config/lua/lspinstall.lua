@@ -1,3 +1,6 @@
-local servers = { 'clangd' }
+local servers = { 'clangd', 'pyright' }
 
-require'lspconfig'.clangd.setup{}
+local lspconfig = require('lspconfig')
+
+lspconfig.clangd.setup{}
+lspconfig.pyright.setup{}
