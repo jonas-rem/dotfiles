@@ -42,16 +42,16 @@ return packer.startup(function(use)
   use 'sharkdp/fd'
   use 'lewis6991/gitsigns.nvim'
 
-  use 'github/copilot.vim'
+  --use 'github/copilot.vim'
 
   -- Colorscheme
   use 'ellisonleao/gruvbox.nvim'
 
-  -- Linter
-  use 'Deedone/checkpatch.nvim'
-
   -- Statusline
   use 'nvim-lualine/lualine.nvim'
+
+  -- Language Server
+  use 'neovim/nvim-lspconfig'
 
   use 'nvim-treesitter/nvim-treesitter'
   if PACKER_BOOTSTRAP then

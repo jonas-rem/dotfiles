@@ -1,4 +1,5 @@
 require('plugins')
+require('lspinstall')
 require('keymaps')
 -- ========================================================================== --
 -- ==                           EDITOR SETTINGS                            == --
@@ -54,15 +55,17 @@ require("gruvbox").setup({
   transparent_mode = false,
 })
 
-
 vim.opt.termguicolors = true
 vim.o.background = "dark"
 vim.cmd('colorscheme gruvbox')
 
-vim.cmd([[
-let g:checkpatch_enabled = 1
-let g:checkpatch_path = "/home/jonas/git/zephyrproject/zephyr/scripts/checkpatch.pl"
-]])
+-- Handle rsti files as rst
+vim.cmd [[
+augroup filetypedetect_rsti
+  autocmd!
+  autocmd BufRead,BufNewFile *.rsti setfiletype rst
+augroup END
+]]
 
 require'lualine'.setup{
 	options = { theme = 'gruvbox'}
@@ -75,4 +78,3 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
   },
 }
-
