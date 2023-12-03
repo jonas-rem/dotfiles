@@ -42,7 +42,7 @@ return packer.startup(function(use)
   use 'sharkdp/fd'
   use 'lewis6991/gitsigns.nvim'
 
-  --use 'github/copilot.vim'
+  use 'github/copilot.vim'
 
   -- Colorscheme
   use 'ellisonleao/gruvbox.nvim'
@@ -52,6 +52,9 @@ return packer.startup(function(use)
 
   -- Language Server
   use 'neovim/nvim-lspconfig'
+
+  -- Tables
+  use 'dhruvasagar/vim-table-mode'
 
   use 'nvim-treesitter/nvim-treesitter'
   if PACKER_BOOTSTRAP then

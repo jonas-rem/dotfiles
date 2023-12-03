@@ -30,6 +30,10 @@ vim.opt.softtabstop = 8
 vim.opt.undodir = vim.fn.expand('~/.vim/undodir')
 vim.opt.undofile = true
 
+vim.g.loaded_perl_provider = 0
+vim.g.python3_host_prog = '/usr/bin/python3'
+vim.g.loaded_ruby_provider = 0
+
 require("gruvbox").setup({
   undercurl = true,
   underline = true,
@@ -74,6 +78,16 @@ require'lualine'.setup{
 require'gitsigns'.setup()
 
 require'nvim-treesitter.configs'.setup {
+ -- A list of parser names, or "all" (the five listed parsers should always be installed)
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "python" },
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- Automatically install missing parsers when entering buffer
+  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+  auto_install = true,
+
   highlight = {
     enable = true,
   },
