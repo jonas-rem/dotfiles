@@ -41,6 +41,8 @@ return packer.startup(function(use)
   use 'nvim-lua/plenary.nvim'
   use 'sharkdp/fd'
   use 'lewis6991/gitsigns.nvim'
+  -- Chat GPT
+  use 'robitx/gp.nvim'
 
   use 'github/copilot.vim'
 

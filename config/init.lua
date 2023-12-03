@@ -77,9 +77,15 @@ require'lualine'.setup{
 
 require'gitsigns'.setup()
 
+-- Chat GPT API
+require'gp'.setup{
+  openai_api_key = os.getenv("OPENAI_API_KEY")
+}
+
 require'nvim-treesitter.configs'.setup {
  -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "python" },
+  --ensure_installed = { "c", "lua", "vim", "vimdoc", "python" },
+  ensure_installed = { " ... " },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,

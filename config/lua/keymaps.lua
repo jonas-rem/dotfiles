@@ -3,6 +3,20 @@ local keymap = vim.keymap.set
 -- Silent keymap option
 local opts = { silent = true }
 
+-- Generic map function
+local function map(mode, lhs, rhs, opts)
+  opts = vim.tbl_extend('force', { noremap = true, silent = true}, opts or {})
+  if type(mode) == 'string' then
+    vim.api.nvim_set_keymap(mode, lhs, rhs, opts)
+  elseif type(mode) == 'table' then
+    for _, m in ipairs(mode) do
+      vim.api.nvim_set_keymap(m, lhs, rhs, opts)
+    end
+  else
+    error(string.format("Unsupported mode type: %s", type(mode)))
+  end
+end
+
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
@@ -12,6 +26,12 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+map({'n', 'v'}, '<leader>cn', ':GpChatNew tabnew<CR>')
+map({'n', 'v'}, '<leader>cr', ':GpChatRespond<CR>')
+map({'n', 'v'}, '<leader>cf', ':GpChatFinder<CR>')
+map({'n', 'v'}, '<leader>cw', ':GpRewrite<CR>')
+map({'n', 'v'}, '<leader>cc', ':GpAppend<CR>')
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
