@@ -79,7 +79,34 @@ require'gitsigns'.setup()
 
 -- Chat GPT API
 require'gp'.setup{
-  openai_api_key = os.getenv("OPENAI_API_KEY")
+  openai_api_key = os.getenv("OPENAI_API_KEY"),
+  agents = {
+    {
+      name = "ChatGPT4",
+      chat = true,
+      command = false,
+      -- string with model name or table with model name and parameters
+      model = { model = "gpt-4-1106-preview", temperature = 1.1, top_p = 1 },
+      -- system prompt (use this to specify the persona/role of the AI)
+      system_prompt = "You are a general AI assistant.\n\n"
+      	.. "The user provided the additional info about how they would like you to respond:\n\n"
+      	.. "- If you're unsure don't guess and say you don't know instead.\n"
+      	.. "- Ask question if you need clarification to provide better answer.\n"
+      	.. "- Don't elide any code from your output if the answer requires coding.\n"
+      	.. "- Give a short answer, if the question can be answered in a reasonable way.\n",
+    },
+    {
+      name = "CodeGPT4",
+      chat = false,
+      command = true,
+      -- string with model name or table with model name and parameters
+      model = { model = "gpt-4-1106-preview", temperature = 0.8, top_p = 1 },
+      -- system prompt (use this to specify the persona/role of the AI)
+      system_prompt = "You are an AI working as a code editor.\n\n"
+      	.. "Please AVOID COMMENTARY OUTSIDE OF THE SNIPPET RESPONSE.\n"
+      	.. "START AND END YOUR ANSWER WITH:\n\n```",
+    },
+  },
 }
 
 require'nvim-treesitter.configs'.setup {

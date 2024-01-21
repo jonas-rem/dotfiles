@@ -44,8 +44,6 @@ return packer.startup(function(use)
   -- Chat GPT
   use 'robitx/gp.nvim'
 
-  use 'github/copilot.vim'
-
   -- Colorscheme
   use 'ellisonleao/gruvbox.nvim'
 
