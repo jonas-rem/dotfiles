@@ -47,6 +47,9 @@ return packer.startup(function(use)
   -- Colorscheme
   use 'ellisonleao/gruvbox.nvim'
 
+  -- java language server
+  use 'mfussenegger/nvim-jdtls'
+
   -- Statusline
   use 'nvim-lualine/lualine.nvim'
 

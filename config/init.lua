@@ -75,6 +75,26 @@ require'lualine'.setup{
 	options = { theme = 'gruvbox'}
 }
 
+local jdtls_config = {
+  cmd = {
+    '/home/jonas/git/jdt-language-server-1.31.0-202401111522/bin/jdtls',
+    '-data',
+    '/home/jonas/jdtls_workspace';
+  },
+  root_dir = vim.fn.getcwd(),
+}
+
+local function jdtls_setup(event)
+  require'jdtls'.start_or_attach(jdtls_config)
+end
+
+vim.api.nvim_create_autocmd('FileType', {
+    group = java_cmds,
+    pattern = { 'java' },
+    desc = 'Setup jdtls',
+    callback = jdtls_setup,
+})
+
 require'gitsigns'.setup()
 
 -- Chat GPT API
