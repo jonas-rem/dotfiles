@@ -14,13 +14,19 @@ local compile_commands_path = find_compile_commands({
 })
 
 
-local servers = { 'clangd', 'ccls', 'pyright' }
+local servers = { 'clangd', 'pyright' }
 local lspconfig = require('lspconfig')
 local clangd_cmd = {"clangd"}
 
 if compile_commands_path then
     table.insert(clangd_cmd, "--compile-commands-dir=" .. compile_commands_path)
+    --print("Using compile commands: " .. compile_commands_path)
+else
+    print("No compile_commands.json found")
 end
+
+table.insert(clangd_cmd, "--log=verbose")
+--print("clangd command: " .. table.concat(clangd_cmd, " "))
 
 --vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile'
 --lspconfig.ccls.setup {
@@ -37,12 +43,17 @@ end
 --
 lspconfig.clangd.setup {
     --cmd = clangd_cmd,
-    --root_dir = function()
-    --    return vim.fn.getcwd()
-    --end
+    settings = {
+        clangd = {
+            offset_encoding = 'utf-16',
+            compilationDatabasePath = compile_commands_path,
+            fallbackFlags = { "-std=c99" }  -- Adjust according to your project needs
+        }
+    }
 }
 
 lspconfig.pyright.setup{
+   offset_encoding = 'utf-16',
    settings = {
       python = {
          analysis = {
@@ -54,7 +65,7 @@ lspconfig.pyright.setup{
    }
 }
 
-vim.lsp.set_log_level("debug")
+--vim.lsp.set_log_level("error")
 
 -- Workaround for slow file indexing that leads to hangs and inferior performance
 -- https://github.com/neovim/neovim/issues/23725#issuecomment-1561364086

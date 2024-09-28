@@ -62,5 +62,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>f', function()
       vim.lsp.buf.format { async = true }
     end, opts)
+    -- Add keybinding for ClangdSwitchSourceHeader
+    vim.api.nvim_set_keymap('n', '<leader>sh', ':ClangdSwitchSourceHeader<CR>', { noremap = true, silent = true })
   end,
 })

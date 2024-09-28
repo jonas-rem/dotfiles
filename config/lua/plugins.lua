@@ -50,6 +50,9 @@ return packer.startup(function(use)
   -- java language server
   use 'mfussenegger/nvim-jdtls'
 
+  -- Github Copilot
+  use 'github/Copilot.vim'
+
   -- Statusline
   use 'nvim-lualine/lualine.nvim'
 
