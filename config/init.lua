@@ -154,14 +154,14 @@ require'gp'.setup{
       	.. "- Don't elide any code from your output if the answer requires coding.\n"
       	.. "- Give a short answer, if the question can be answered in a reasonable way.\n",
     },
-    --{ name = "ChatGPTo1-mini",
-    --  chat = true,
-    --  command = false,
-    --  -- string with model name or table with model name and parameters
-    --  model = { model = "o1-mini", temperature = 0.8, top_p = 1 },
-    --  -- system prompt (use this to specify the persona/role of the AI)
-    --  system_prompt = ""
-    --},
+    { name = "o1-mini",
+      chat = true,
+      command = false,
+      -- string with model name or table with model name and parameters
+      model = { model = "o1-mini", temperature = 0.8, top_p = 1 },
+      -- system prompt (use this to specify the persona/role of the AI)
+      system_prompt = "You are a general AI assistant.\n\n"
+    },
     { name = "ChatGPT3-5", disable = true },
     {
       name = "CodeGPT4o",

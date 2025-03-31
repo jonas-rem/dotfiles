@@ -63,6 +63,8 @@ return packer.startup(function(use)
   use 'dhruvasagar/vim-table-mode'
 
   use 'nvim-treesitter/nvim-treesitter'
+
+  use 'tpope/vim-fugitive'
   if PACKER_BOOTSTRAP then
     require('packer').sync()
   end
