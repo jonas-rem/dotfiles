@@ -1,69 +1,32 @@
-local function find_compile_commands(folders)
-    for _, folder in ipairs(folders) do
-       local cc_json_path = vim.fn.glob(vim.fn.fnamemodify(folder, ':p') .. "compile_commands.json")
-       if vim.fn.filereadable(cc_json_path) == 1 then
-           return cc_json_path
-       end
-    end
-    return nil
+
+-- Function to check if a file exists
+local function file_exists(name)
+  local f = io.open(name, "r")
+  if f then f:close() end
+  return f ~= nil
 end
 
-local compile_commands_path = find_compile_commands({
-    "build",
-    "armgcc",
-})
-
-
-local servers = { 'clangd', 'pyright' }
-local lspconfig = require('lspconfig')
-local clangd_cmd = {"clangd"}
-
-if compile_commands_path then
-    table.insert(clangd_cmd, "--compile-commands-dir=" .. compile_commands_path)
-    --print("Using compile commands: " .. compile_commands_path)
-else
-    print("No compile_commands.json found")
+-- Decide which server to use based on the presence of files
+local function get_server_config()
+  if file_exists("compile_commands.json") then
+    return "clangd"
+  elseif file_exists("tags") then
+    return "ctags"
+  else
+    return "clangd" -- default
+  end
 end
 
-table.insert(clangd_cmd, "--log=verbose")
---print("clangd command: " .. table.concat(clangd_cmd, " "))
+-- Set up your LSP server based on the configuration
+local server = get_server_config()
 
---vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile'
---lspconfig.ccls.setup {
---  init_options = {
---    compilationDatabaseDirectory = "build";
---    index = {
---      threads = 0;
---    };
---    clang = {
---      excludeArgs = { "-frounding-math"} ;
---    };
---  }
---}
---
-lspconfig.clangd.setup {
-    --cmd = clangd_cmd,
-    settings = {
-        clangd = {
-            offset_encoding = 'utf-16',
-            compilationDatabasePath = compile_commands_path,
-            fallbackFlags = { "-std=c99" }  -- Adjust according to your project needs
-        }
-    }
+vim.lsp.config.clangd = {
+  cmd = { 'clangd', '--background-index' },
+  root_markers = { 'compile_commands.json', 'compile_flags.txt' },
+  filetypes = { 'c', 'cpp' },
 }
 
-lspconfig.pyright.setup{
-   offset_encoding = 'utf-16',
-   settings = {
-      python = {
-         analysis = {
-            autoSearchPaths = true,
-            diagnosticMode = "workspace",
-            useLibraryCodeForTypes = true
-         }
-      }
-   }
-}
+vim.lsp.enable({'clangd'})
 
 --vim.lsp.set_log_level("error")
 

@@ -35,12 +35,13 @@ packer.init {
 
 -- Install your plugins here
 return packer.startup(function(use)
-  use 'wbthomason/packer.nvim' -- Have packer manage itself
+  use 'wbthomason/packer.nvim'
 
   use 'nvim-telescope/telescope.nvim'
   use 'nvim-lua/plenary.nvim'
   use 'sharkdp/fd'
   use 'lewis6991/gitsigns.nvim'
+
   -- Chat GPT
   use 'robitx/gp.nvim'
 
@@ -55,9 +56,6 @@ return packer.startup(function(use)
 
   -- Statusline
   use 'nvim-lualine/lualine.nvim'
-
-  -- Language Server
-  use 'neovim/nvim-lspconfig'
 
   -- Tables
   use 'dhruvasagar/vim-table-mode'
